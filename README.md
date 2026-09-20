@@ -11,14 +11,14 @@ publicly.
 The system is built in four stages, each one working end to end before the
 next begins:
 
-1. **Pipeline spine** — the project skeleton, configuration, and entry point
-   that every later stage plugs into.
-2. **Data layer** — downloading the monthly trip archives and turning them
-   into a station-hour panel ready for modelling.
-3. **Serving** — a baseline and a learned model, evaluated on a temporal
-   split, with a way to produce forecasts.
-4. **Retraining and monitoring** — keeping the model current as new months
-   of data are published, and watching for drift.
+1. **Pipeline spine**: ingesting a month of trips, splitting it by time,
+   scoring a naive baseline against one model, all covered by tests.
+2. **Data layer**: trips stored in a database, features built in SQL, and
+   experiments tracked so results can be compared.
+3. **Serving**: a prediction API over versioned model artifacts, packaged in
+   a container and built by CI.
+4. **Retraining and monitoring**: retraining as each new month is published,
+   comparing against the deployed model, and watching for drift.
 
 ## Installing and running
 
